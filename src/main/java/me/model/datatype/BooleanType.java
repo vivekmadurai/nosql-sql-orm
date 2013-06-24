@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import orangescape.exception.SessionException;
-
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.internal.util.compare.EqualsHelper;
@@ -52,7 +50,7 @@ public class BooleanType implements UserType{
 		}catch (ClassCastException e) {
 			String colName = names[0];
 			String tabName = rs.getMetaData().getTableName(rs.findColumn(colName));
-			throw new SessionException("Session1003", e, colName, tabName);
+			throw new RuntimeException(String.format("Error while getting the column %s for the table %", colName, tabName));
 		}
 		if (!rs.wasNull()) {
 			result = dbVal == false ? 0.0 : 1.0;

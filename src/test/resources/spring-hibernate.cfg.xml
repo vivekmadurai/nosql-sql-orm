@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!-- configuration for ORM layer -->
+	<!-- Hibernate session factory -->
+	<bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource">
+	      <ref bean="dataSource"/>
+	    </property>
+	 
+	    <property name="hibernateProperties">
+	       <props>
+	         <!--prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop-->
+	         <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+	         
+	         <prop key="hibernate.default_entity_mode">dynamic-map</prop>
+	         <prop key="hibernate.hbm2ddl.auto">update</prop>
+	         <prop key="hibernate.show_sql">true</prop>
+	         <prop key="hibernate.jdbc.batch_size">30</prop>
+	         <!--prop key="hibernate.multiTenancy">SCHEMA</prop-->
+	       </props>
+	     </property>
+	     
+	 	<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/hbm</value>
+			</list>
+		</property>
+
+	</bean>
+	<!-- data source oonfiguration -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!--property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/guestbook" />
+		<property name="username" value="root" />
+		<property name="password" value="root" /-->
+		
+		<!-- where the db will be placed (created automatically) -->
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:~/test;MVCC=TRUE"/>
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+	
+</beans>
