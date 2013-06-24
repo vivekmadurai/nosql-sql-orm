@@ -7,6 +7,7 @@ import me.metadata.Model;
 import me.metadata.Project;
 import me.model.dao.Instance;
 import me.model.session.Criteria.Operator;
+import me.security.auth.User;
 import me.util.Util;
 
 import org.apache.log4j.Logger;

@@ -18,6 +18,7 @@
         <maven-compiler.version>2.3.2</maven-compiler.version>
         
         <!--  Compile time Dependencies -->
+        <javax.servlet.api.version>2.5</javax.servlet.api.version> 
         <springframework.version>3.2.2.RELEASE</springframework.version>
         <google.appengine.version>1.7.7</google.appengine.version>
         
@@ -36,6 +37,13 @@
   </properties>
   
   <dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${javax.servlet.api.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    
      <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-expression</artifactId>
@@ -103,4 +111,36 @@
     </dependency>
     
   </dependencies>
+  
+  <build>
+        <outputDirectory>${basedir}/${target.dir}/classes</outputDirectory>
+        <testOutputDirectory>${basedir}/${target.dir}/classes</testOutputDirectory>
+        <plugins>
+            <!-- just to tell the maven to use jdk 1.7 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <executable>${env.JAVA_HOME}</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.version}</version>
+            </plugin>
+            <plugin>
+              <groupId>org.eclipse.jetty</groupId>
+              <artifactId>jetty-maven-plugin</artifactId>
+              <version>${jetty.version}</version>
+              <configuration>
+                <war>${basedir}/saasengine-web/target/saasengine-web-0.1</war>
+              </configuration>
+          </plugin>
+        </plugins>
+    </build>
 </project>

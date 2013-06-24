@@ -7,6 +7,7 @@ import me.metadata.Attribute;
 import me.metadata.Model;
 import me.metadata.Project;
 import me.model.dao.Instance;
+import me.security.auth.User;
 
 /**
  * @author VivekMadurai

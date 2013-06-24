@@ -1,4 +1,4 @@
-package me.model.session;
+package me.security.auth;
 
 /**
  * @author VivekMadurai
